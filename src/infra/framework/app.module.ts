@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from 'src/domain/entities/user.entity';
+import { RepositoriesModule } from 'src/infra/framework/repositories.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { User } from 'src/domain/entities/user.entity';
       entities: [User],
       synchronize: true,
     }),
+    RepositoriesModule,
   ],
   controllers: [],
   providers: [],
