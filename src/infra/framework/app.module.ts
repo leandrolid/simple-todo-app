@@ -2,10 +2,12 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { Task } from 'src/domain/entities/task.entity';
 import { User } from 'src/domain/entities/user.entity';
 import { AuthModule } from 'src/infra/framework/auth.module';
 import { RepositoriesModule } from 'src/infra/framework/repositories.module';
 import { ServicesModule } from 'src/infra/framework/services.module';
+import { TasksModule } from 'src/infra/framework/tasks.module';
 import { UsersModule } from 'src/infra/framework/users.module';
 
 @Module({
@@ -31,6 +33,7 @@ import { UsersModule } from 'src/infra/framework/users.module';
     ServicesModule,
     UsersModule,
     AuthModule,
+    TasksModule,
   ],
   controllers: [],
   providers: [],
