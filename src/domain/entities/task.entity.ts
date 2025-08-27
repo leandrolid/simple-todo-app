@@ -1,19 +1,40 @@
+import { User } from 'src/domain/entities/user.entity';
 import { TaskStatus } from 'src/domain/enums/task-status.enum';
-import { RemoveMethods } from 'src/types/remove-methods.type';
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from 'typeorm';
 
+@Entity('tasks')
 export class Task {
+  @PrimaryColumn({
+    type: 'uuid',
+    generated: 'uuid',
+  })
   id: string;
+
+  @Column({ type: 'text', name: 'title' })
   title: string;
+
+  @Column({ type: 'text', name: 'description' })
   description: string;
+
+  @Column({
+    type: 'timestamp',
+    name: 'created_at',
+    default: () => 'CURRENT_TIMESTAMP',
+  })
   createdAt: Date;
+
+  @Column({ type: 'timestamp', name: 'expired_at', nullable: true })
   expiredAt: Date | null;
+
+  @Column({ type: 'enum', enum: TaskStatus, default: TaskStatus.PENDING })
   status: TaskStatus;
 
-  constructor(props: RemoveMethods<Task>) {
-    Object.assign(this, props);
-    this.createdAt = new Date();
-    this.status = TaskStatus.PENDING;
-  }
+  @Column({ type: 'uuid', name: 'user_id' })
+  userId: string;
+
+  @ManyToOne(() => User, (user) => user.tasks)
+  @JoinColumn({ name: 'user_id' })
+  user: User;
 
   completed() {
     this.status = TaskStatus.COMPLETED;

@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryColumn } from 'typeorm';
+import { Task } from 'src/domain/entities/task.entity';
+import { Column, Entity, OneToMany, PrimaryColumn } from 'typeorm';
 
 /**
  * Não houve nenhuma definição para a entidade de usuário então criei uma básica.
@@ -26,4 +27,7 @@ export class User {
     default: () => 'CURRENT_TIMESTAMP',
   })
   createdAt: Date;
+
+  @OneToMany(() => Task, (task) => task.user)
+  tasks: Task[];
 }
