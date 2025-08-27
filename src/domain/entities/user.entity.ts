@@ -26,8 +26,4 @@ export class User {
     default: () => 'CURRENT_TIMESTAMP',
   })
   createdAt: Date;
-
-  constructor(props: User) {
-    Object.assign(this, props);
-  }
 }

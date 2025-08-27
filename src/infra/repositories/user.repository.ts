@@ -15,7 +15,11 @@ export class UserRepository implements IUserRepository {
   ) {}
 
   createOne(input: CreateUserInput): Promise<User> {
-    const user = this.ormRepository.create(input);
+    const user = this.ormRepository.create({
+      name: input.name,
+      email: input.email,
+      password: input.passwordHash,
+    });
     return this.ormRepository.save(user);
   }
 
