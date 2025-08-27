@@ -3,6 +3,7 @@ import {
   ApiBadRequestResponse,
   ApiConflictResponse,
   ApiCreatedResponse,
+  ApiTags,
 } from '@nestjs/swagger';
 import { CreateUserDto } from 'src/application/users/create-user/create-user.dto';
 import { CreateUserUseCase } from 'src/application/users/create-user/create-user.usecase';
@@ -10,6 +11,7 @@ import { CreateUserUseCase } from 'src/application/users/create-user/create-user
 @Controller({
   path: 'users',
 })
+@ApiTags('Users')
 export class CreateUserController {
   constructor(private readonly createUserUseCase: CreateUserUseCase) {}
 

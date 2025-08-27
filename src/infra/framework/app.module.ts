@@ -1,7 +1,9 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import { JwtModule } from '@nestjs/jwt';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from 'src/domain/entities/user.entity';
+import { AuthModule } from 'src/infra/framework/auth.module';
 import { RepositoriesModule } from 'src/infra/framework/repositories.module';
 import { ServicesModule } from 'src/infra/framework/services.module';
 import { UsersModule } from 'src/infra/framework/users.module';
@@ -21,9 +23,14 @@ import { UsersModule } from 'src/infra/framework/users.module';
       entities: [User],
       synchronize: true,
     }),
+    JwtModule.register({
+      secret: process.env.JWT_SECRET,
+      global: true,
+    }),
     RepositoriesModule,
     ServicesModule,
     UsersModule,
+    AuthModule,
   ],
   controllers: [],
   providers: [],
