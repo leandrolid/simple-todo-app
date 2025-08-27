@@ -3,6 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from 'src/domain/entities/user.entity';
 import { RepositoriesModule } from 'src/infra/framework/repositories.module';
+import { ServicesModule } from 'src/infra/framework/services.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { RepositoriesModule } from 'src/infra/framework/repositories.module';
       synchronize: true,
     }),
     RepositoriesModule,
+    ServicesModule,
   ],
   controllers: [],
   providers: [],
