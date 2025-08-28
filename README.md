@@ -41,7 +41,6 @@ This is a simple Todo List API built with NestJS and TypeORM, using PostgreSQL a
     ```
 
 - **Adjustments:**
-  - Fix error on startup due to delay on database readiness.
   - Update environment variables in `compose.yaml` as needed.
   - Add new features or endpoints in the `src/` directory.
   - Adjust rate limiting or security settings in `src/infra/middlewares/`.
