@@ -10,13 +10,7 @@ export class UpdateTaskUseCase {
     private readonly taskRepository: ITaskRepository,
   ) {}
 
-  async execute({
-    id,
-    title,
-    description,
-    completed,
-    user,
-  }: Auth<UpdateTaskDto>) {
+  async execute({ id, title, description, status, user }: Auth<UpdateTaskDto>) {
     const task = await this.taskRepository.findById(id);
     if (!task) {
       throw new NotFoundException('Task not found');
@@ -24,9 +18,7 @@ export class UpdateTaskUseCase {
     if (task.userId !== user.id) {
       throw new NotFoundException('Task not found');
     }
-    if (completed) {
-      task.markAsCompleted();
-    }
+    task.updateStatus(status);
     task.updateTitle(title);
     task.updateDescription(description);
     const updatedTask = await this.taskRepository.updateOne(task);

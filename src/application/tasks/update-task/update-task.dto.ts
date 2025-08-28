@@ -1,10 +1,11 @@
 import {
-  IsBoolean,
+  IsEnum,
   IsOptional,
   IsString,
   IsUUID,
   MinLength,
 } from 'class-validator';
+import { TaskStatus } from 'src/domain/enums/task-status.enum';
 
 export class UpdateTaskParamsDto {
   @IsString()
@@ -23,9 +24,9 @@ export class UpdateTaskBodyDto {
   @IsOptional()
   description: string;
 
-  @IsBoolean()
+  @IsEnum(TaskStatus)
   @IsOptional()
-  completed: boolean;
+  status: TaskStatus;
 }
 
 export interface UpdateTaskDto extends UpdateTaskParamsDto, UpdateTaskBodyDto {}
