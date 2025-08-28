@@ -1,14 +1,11 @@
 FROM node:20
 
-WORKDIR /usr/src/app
+WORKDIR /app
 
 COPY package*.json ./
-
-RUN yarn install
-
 COPY . .
 
-RUN yarn build
+RUN yarn install && yarn build
 
 EXPOSE 3000
 

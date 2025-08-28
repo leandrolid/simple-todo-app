@@ -1,25 +1,29 @@
 services:
   db:
     image: postgres:15
-    hostname: postgres
-    restart: always
+    hostname: db
     ports:
       - 5555:5432
     environment:
       POSTGRES_USER: docker
       POSTGRES_PASSWORD: docker
       POSTGRES_DB: task_management
-  # app:
-  #   build:
-  #     context: .
-  #     dockerfile: Dockerfile
-  #   restart: always
-  #   ports:
-  #     - 3000:3000
-  #   env_file:
-  #     - .env
-  #   depends_on:
-  #     - db
+
+  app: 
+    build: .
+    hostname: app
+    restart: on-failure
+    ports:
+      - 3000:3000
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USER: docker
+      DB_PASSWORD: docker
+      DB_NAME: task_management
+      JWT_SECRET: supersecretkey
+    depends_on:
+      - db
 
 networks:
   default:
