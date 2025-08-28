@@ -39,8 +39,8 @@ export class CreateTaskController {
   })
   async execute(@Body() body: CreateTaskDto, @AuthUser() user: AuthUserDto) {
     return this.createTaskUseCase.execute({
-      user,
       ...body,
+      user,
     });
   }
 }
