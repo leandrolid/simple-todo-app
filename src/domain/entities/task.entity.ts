@@ -36,7 +36,16 @@ export class Task {
   @JoinColumn({ name: 'user_id' })
   user: User;
 
-  completed() {
+  markAsCompleted() {
+    this.expiredAt = new Date();
     this.status = TaskStatus.COMPLETED;
+  }
+
+  updateTitle(title?: string) {
+    this.title = title || this.title;
+  }
+
+  updateDescription(description?: string) {
+    this.description = description || this.description;
   }
 }
